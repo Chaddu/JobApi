@@ -7,4 +7,5 @@ public interface ICompanyMemberRepository : IGenericRepository<CompanyMember>
     Task<bool> IsMemberAsync(int companyId, int userId);
     Task<List<CompanyMember>> GetByCompanyIdAsync(int companyId);
     Task<List<CompanyMember>> GetByUserIdAsync(int userId);
+    Task<CompanyMember?> GetByCompanyAndUserAsync(int companyId,int userId);
 }

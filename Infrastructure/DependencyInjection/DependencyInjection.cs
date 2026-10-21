@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure;
+namespace Infrastructure.DependencyInjection;
 
 public static class DependencyInjection
 {
@@ -28,6 +28,15 @@ public static class DependencyInjection
         services.Configure<JwtSettings>(
     configuration.GetSection("JwtSettings"));
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IJobApplicationService, JobApplicationService>();
+        services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IJobService, JobService>();
+        services.AddScoped<ISavedJobService, SavedJobService>();
+        services.AddScoped<ICompanyReviewService, CompanyReviewService>();
+        services.AddScoped<ISkillService, SkillService>();
+        services.AddScoped<IUserSkillService, UserSkillService>();
+        services.AddScoped<IJobSkillService, JobSkillService>();
 
         services.AddScoped<IJwtProvider, JwtProvider>();
 

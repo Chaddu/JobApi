@@ -4,7 +4,7 @@ using Application.DTOs.Response;
 
 namespace Application.Interfaces.Services;
 
-internal interface IJobApplicationService
+public interface IJobApplicationService
 {
     Task<Result<JobApplicationResponse>> GetByIdAsync(int id, int currentUserId);
     Task<Result<List<JobApplicationResponse>>> GetMyApplicationsAsync(int currentUserId);

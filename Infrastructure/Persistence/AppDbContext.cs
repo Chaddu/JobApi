@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Common;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence;
@@ -23,5 +24,25 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
         modelBuilder.ApplyConfigurationsFromAssembly(
             typeof(AppDbContext).Assembly);
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            if (typeof(BaseEntity<int>).IsAssignableFrom(entityType.ClrType))
+            {
+                var method = typeof(AppDbContext)
+                    .GetMethod(
+                        nameof(SetSoftDeleteFilter),
+                        System.Reflection.BindingFlags.NonPublic |
+                        System.Reflection.BindingFlags.Static)!
+                    .MakeGenericMethod(entityType.ClrType);
+
+                method.Invoke(null, [modelBuilder]);
+            }
+        }
+    }
+    private static void SetSoftDeleteFilter<TEntity>(ModelBuilder modelBuilder)
+    where TEntity : BaseEntity<int>
+    {
+        modelBuilder.Entity<TEntity>()
+            .HasQueryFilter(entity => entity.DeletedAt == null);
     }
 }

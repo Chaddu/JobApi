@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces.Repositories;
 using Domain.Entities;
+using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.Repositories;
@@ -16,7 +17,7 @@ public class SavedJobRepository(AppDbContext context)
     public async Task<List<SavedJob>> GetByUserIdAsync(int userId)
     {
         return await _dbSet
-            .Where(savedJob => savedJob.UserId == userId)
+            .Where(savedJob => savedJob.UserId == userId && savedJob.Job.Status == JobStatus.Open)
             .ToListAsync();
     }
 }

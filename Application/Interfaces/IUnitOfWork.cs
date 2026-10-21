@@ -1,5 +1,5 @@
 ﻿using Application.Interfaces.Repositories;
-using Domain.Entities;
+
 
 namespace Application.Interfaces;
 
@@ -18,4 +18,5 @@ public interface IUnitOfWork
     ICompanyReviewRepository CompanyReviews { get; }
 
     Task<int> SaveChangesAsync();
+    Task ExecuteInTransactionAsync(Func<Task> operation);
 }

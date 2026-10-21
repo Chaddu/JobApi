@@ -1,5 +1,4 @@
 ﻿using Domain.Common;
-using System.Globalization;
 
 namespace Domain.Entities;
 public class Skill : BaseEntity<int>

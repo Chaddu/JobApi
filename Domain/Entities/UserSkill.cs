@@ -16,10 +16,12 @@ public class UserSkill : BaseEntity<int>
     }
 
     public UserSkill(
-        int userId,
-        int skillId,
-        int yearsOfExperience)
+     int userId,
+     int skillId,
+     int yearsOfExperience)
     {
+        ValidateExperience(yearsOfExperience);
+
         UserId = userId;
         SkillId = skillId;
         YearsOfExperience = yearsOfExperience;

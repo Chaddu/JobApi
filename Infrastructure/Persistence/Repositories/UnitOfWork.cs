@@ -21,4 +21,21 @@ public class UnitOfWork(AppDbContext context) : IUnitOfWork
     {
         return await context.SaveChangesAsync();
     }
+
+    public async Task ExecuteInTransactionAsync(Func<Task> operation)
+    {
+        var transaction = await context.Database.BeginTransactionAsync();
+
+        try
+        {
+            await operation();
+            await transaction.CommitAsync();
+
+        }
+        catch
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+    }
 }

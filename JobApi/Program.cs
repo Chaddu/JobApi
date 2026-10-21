@@ -1,6 +1,6 @@
 using Application.Common;
 using Application.Profiles;
-using Infrastructure;
+using Infrastructure.DependencyInjection;
 using Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;

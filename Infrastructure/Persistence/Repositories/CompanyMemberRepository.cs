@@ -32,4 +32,9 @@ public class CompanyMemberRepository(AppDbContext context)
             .Where(member => member.UserId == userId)
             .ToListAsync();
     }
+
+    public async Task<CompanyMember?> GetByCompanyAndUserAsync(int companyId, int userId)
+    {
+        return await _dbSet.FirstOrDefaultAsync(member => member.CompanyId == companyId && member.UserId == userId);
+    }
 }
