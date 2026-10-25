@@ -1,10 +1,13 @@
 ﻿using Application.DTOs.Request;
 using Application.DTOs.Response;
 using Application.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobApi.Controllers;
 
+[Authorize]
+[Route("api/[controller]")]
 public class JobApplicationsController(IJobApplicationService jobApplicationService) : BaseController
 {
     [HttpGet("{id:int}")]

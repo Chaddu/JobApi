@@ -37,6 +37,8 @@ public static class DependencyInjection
         services.AddScoped<ISkillService, SkillService>();
         services.AddScoped<IUserSkillService, UserSkillService>();
         services.AddScoped<IJobSkillService, JobSkillService>();
+        services.AddScoped<ICompanyMemberService, CompanyMemberService>();
+        services.AddScoped<ICompanyService, CompanyService>();
 
         services.AddScoped<IJwtProvider, JwtProvider>();
 

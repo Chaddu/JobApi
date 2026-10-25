@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JobApi.Controllers;
 
+[Route("api/[controller]")]
 [Authorize]
 public class NotificationsController(INotificationService notificationService) : BaseController
 {
